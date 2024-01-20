@@ -1,12 +1,14 @@
 import argparse
-import gym
-import numpy as np
 import random
 import string
-import tensorflow as tf
 from datetime import datetime
-from tensorflow.python.keras.optimizer_v2.learning_rate_schedule import LearningRateSchedule
 from typing import Union, Callable, Type, Dict, Optional
+
+import gym
+import numpy as np
+import tensorflow as tf
+from keras.optimizers import Optimizer
+from tensorflow.python.keras.optimizer_v2.learning_rate_schedule import LearningRateSchedule
 
 
 def str2bool(v: Union[bool, str]) -> bool:
@@ -20,7 +22,7 @@ def str2bool(v: Union[bool, str]) -> bool:
         raise argparse.ArgumentTypeError("Boolean value expected.")
 
 
-def reset_optimizer(optimizer: tf.keras.optimizers.Optimizer) -> None:
+def reset_optimizer(optimizer: Optimizer) -> None:
     # Decide whether learning rate decay has been applied
     start_index = 0 if isinstance(optimizer.lr, LearningRateSchedule) else 1
     # The first variable is the step count which resets the learning rate decay

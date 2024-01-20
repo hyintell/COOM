@@ -2,20 +2,20 @@ from setuptools import find_packages, setup
 
 # Required dependencies
 required = [
-    "tensorflow==2.5.0",
-    "tensorflow-probability==0.11.0",
-    "matplotlib==3.5.2",
+    "tensorflow=2.11",
+    "tensorflow-probability=0.19",
+    "matplotlib",
     "seaborn",
     "wandb",
-    "vizdoom",
     "gym",
-    "gymnasium==0.28.0",
-    "numpy==1.19.5",
+    "gymnasium",
+    "numpy",
     "moviepy",
     "opencv-python",
     "imageio-ffmpeg",
     "promise",
-    "scipy==1.8.0",
+    "scipy==1.11.4",
+    "vizdoom",
 ]
 
 setup(

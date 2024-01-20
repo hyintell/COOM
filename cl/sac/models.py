@@ -2,10 +2,10 @@ from typing import Callable, Iterable, List, Tuple
 
 import gym
 import tensorflow as tf
-from tensorflow.keras.layers import LayerNormalization
-from tensorflow.python.keras import Input, Model, Sequential
-from tensorflow.python.keras.engine.input_layer import InputLayer
-from tensorflow.python.keras.layers import Conv2D, Flatten, Dense, Activation, Concatenate, LSTM, TimeDistributed
+from keras import Input, Model, Sequential
+from keras.engine.input_layer import InputLayer
+from keras.layers import Conv2D, Flatten, Dense, Activation, Concatenate, LSTM
+from keras.layers import LayerNormalization, TimeDistributed
 
 
 def mlp(state_shape: Tuple[int], num_tasks: int, hidden_sizes: Iterable[int], activation: Callable,
@@ -60,16 +60,16 @@ def _choose_head(out: tf.Tensor, num_heads: int, one_hot_task_id: tf.Tensor) -> 
 
 class MlpActor(Model):
     def __init__(
-        self,
-        state_space: gym.spaces.Box,
-        action_space: gym.spaces.Discrete,
-        num_tasks: int,
-        hidden_sizes: Tuple[int] = (256, 256),
-        activation: Callable = tf.tanh,
-        use_layer_norm: bool = False,
-        use_lstm: bool = False,
-        num_heads: int = 1,
-        hide_task_id: bool = False,
+            self,
+            state_space: gym.spaces.Box,
+            action_space: gym.spaces.Discrete,
+            num_tasks: int,
+            hidden_sizes: Tuple[int] = (256, 256),
+            activation: Callable = tf.tanh,
+            use_layer_norm: bool = False,
+            use_lstm: bool = False,
+            num_heads: int = 1,
+            hide_task_id: bool = False,
     ) -> None:
         super(MlpActor, self).__init__()
         self.num_heads = num_heads
@@ -106,16 +106,16 @@ class MlpActor(Model):
 
 class MlpCritic(Model):
     def __init__(
-        self,
-        state_space: gym.spaces.Box,
-        action_space: gym.spaces.Discrete,
-        num_tasks: int,
-        hidden_sizes: Iterable[int] = (256, 256),
-        activation: Callable = tf.tanh,
-        use_layer_norm: bool = False,
-        use_lstm: bool = False,
-        num_heads: int = 1,
-        hide_task_id: bool = False,
+            self,
+            state_space: gym.spaces.Box,
+            action_space: gym.spaces.Discrete,
+            num_tasks: int,
+            hidden_sizes: Iterable[int] = (256, 256),
+            activation: Callable = tf.tanh,
+            use_layer_norm: bool = False,
+            use_lstm: bool = False,
+            num_heads: int = 1,
+            hide_task_id: bool = False,
     ) -> None:
         super(MlpCritic, self).__init__()
         self.hide_task_id = hide_task_id

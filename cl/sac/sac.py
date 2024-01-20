@@ -1,13 +1,15 @@
 import math
-import numpy as np
 import os
-import tensorflow as tf
 import time
 from pathlib import Path
-from tensorflow.python.framework import dtypes
-from tensorflow.python.keras.optimizer_v2.learning_rate_schedule import LearningRateSchedule
-from tensorflow_probability.python.distributions import Categorical
 from typing import Callable, Dict, List, Optional, Tuple, Union
+
+import numpy as np
+import tensorflow as tf
+from keras.optimizers import Adam
+from keras.optimizers.schedules.learning_rate_schedule import ExponentialDecay, PolynomialDecay, LearningRateSchedule
+from tensorflow.python.framework import dtypes
+from tensorflow_probability.python.distributions import Categorical
 
 from cl.sac import models
 from cl.sac.exploration import ExplorationHelper
@@ -213,12 +215,12 @@ class SAC:
         if lr_decay_steps is None:
             lr_decay_steps = steps_per_env
         if lr_decay == 'exponential':
-            lr = tf.keras.optimizers.schedules.ExponentialDecay(
+            lr = ExponentialDecay(
                 initial_learning_rate=lr,
                 decay_steps=lr_decay_steps,
                 decay_rate=lr_decay_rate)
         elif lr_decay == 'linear':
-            lr = tf.keras.optimizers.schedules.PolynomialDecay(
+            lr = PolynomialDecay(
                 initial_learning_rate=lr,
                 decay_steps=lr_decay_steps,
                 end_learning_rate=lr * lr_decay_rate,
@@ -227,7 +229,7 @@ class SAC:
                 name=None
             )
 
-        self.optimizer = tf.keras.optimizers.Adam(learning_rate=lr)
+        self.optimizer = Adam(learning_rate=lr)
 
         # For reference on automatic alpha tuning, see
         # "Automating Entropy Adjustment for Maximum Entropy" section

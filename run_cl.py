@@ -60,7 +60,10 @@ def main(parser: argparse.ArgumentParser):
         # Restrict TensorFlow to only use the specified GPU
         physical_devices = tf.config.list_physical_devices('GPU')
         logger.log(f"list of physical devices GPU: {physical_devices}", color='magenta')
-        gpu = physical_devices[args.gpu]
+        try:
+            gpu = physical_devices[args.gpu]
+        except Exception:
+            raise ValueError(f"GPU {args.gpu} not found")
         tf.config.experimental.set_visible_devices(gpu, 'GPU')
         logger.log(f"Using GPU: {gpu}", color='magenta')
 

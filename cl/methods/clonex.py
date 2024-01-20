@@ -1,6 +1,8 @@
+from typing import Dict, List, Optional, Tuple
+
 import tensorflow as tf
 import tensorflow_probability as tfp
-from typing import Dict, List, Optional, Tuple
+from tensorflow_probability.python.distributions import Categorical
 
 from cl.sac.replay_buffers import EpisodicMemory, ReplayBuffer
 from cl.sac.sac import SAC
@@ -146,6 +148,6 @@ class ClonExSAC(SAC):
 
 
 def kl_divergence(q_logits, p_logits):
-    first_dist = tfp.distributions.Categorical(logits=q_logits)
-    second_dist = tfp.distributions.Categorical(logits=p_logits)
+    first_dist = Categorical(logits=q_logits)
+    second_dist = Categorical(logits=p_logits)
     return tfp.distributions.kl_divergence(first_dist, second_dist, allow_nan_stats=True, name=None)
