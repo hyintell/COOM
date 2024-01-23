@@ -29,26 +29,7 @@ setup(
     include_package_data=True,
     install_requires=coom_requirements,
     extras_require={
-        'cl': [
-            # Dependencies specific to the 'cl' component
-            # These can also be read from '/cl/requirements.txt'
-        ]
+        'cl': cl_requirements,
+        'results': results_processing_requirements,
     },
-)
-
-setup(
-    name="your_project_name",
-    version="0.1",
-    packages=find_packages(),
-    install_requires=[
-        # Dependencies for the 'coom' package
-        # You can also read these from '/coom/requirements.txt' if you prefer
-    ],
-    extras_require={
-        'cl': [
-            # Dependencies specific to the 'cl' component
-            # These can also be read from '/cl/requirements.txt'
-        ]
-    },
-    # Include other relevant setup parameters
 )
