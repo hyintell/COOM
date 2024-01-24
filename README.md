@@ -72,8 +72,8 @@ Below we provide a short code snippet to run a sequence with the COOM benchmark.
 
 ## Basic Usage
 ```
-from COOM.envs import ContinualLearningEnv
-from COOM.utils.enums import Sequence
+from COOM.env.continual import ContinualLearningEnv
+from COOM.utils.config import Sequence
 
 cl_env = ContinualLearningEnv(Sequence.CO8)
 for env in cl_env.tasks:
