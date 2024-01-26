@@ -4,8 +4,12 @@ COOM is a Continual Learning benchmark for embodied pixel-based RL, consisting o
 distinct 3D environments with diverse objectives and egocentric perception. COOM is designed for task-incremental learning,
 in which task boundaries are clearly defined. A short presentation of COOM can be found on 
 [SlidesLive](https://recorder-v3.slideslive.com/#/share?share=85989&s=533e46f9-1a4c-47ce-a82f-2a427bdd6429)
-and a demo is available below    
-[![Youtube](http://img.youtube.com/vi/FUm2B8MZ6d0/0.jpg)](https://www.youtube.com/watch?v=FUm2B8MZ6d0&list=PL6nJZHA3y2fxQK73jmuI5teM3n6Mydcf7).
+and a demo is available on [Youtube](https://www.youtube.com/watch?v=FUm2B8MZ6d0&list=PL6nJZHA3y2fxQK73jmuI5teM3n6Mydcf7).
+
+<p align="center">
+  <img src="assets/gifs/demo1.gif" alt="Demo1" style="vertical-align: top;"/>
+  <img src="assets/gifs/demo2.gif" alt="Demo2" style="vertical-align: top;"/>
+</p>
 
 ## Installation
 1. Clone the repository
@@ -24,16 +28,16 @@ $ pip install .
 ## Environments
 The benchmark consists of 8 scenarios:
 
-| Scenario         | Success Metric    | Enemies | Weapon  | Items   | Max Steps | Execute | Stochasticity                              | 
-|------------------|-------------------|---------|---------|---------|-----------|---------|--------------------------------------------|    
-| Pitfall          | Distance Covered  | &cross; | &cross; | &cross; | 1000      | JUMP    | Pitfall tile locations                     | 
-| Arms Dealer      | Weapons Delivered | &cross; | &check; | &check; | 1000      | SPEED   | Weapon spawn locations, delivery locations | 
-| Hide and Seek    | Frames Alive      | &check; | &cross; | &check; | 2500      | SPEED   | Enemy behaviour, item spawn locations      | 
-| Floor is Lava    | Frames Alive      | &cross; | &cross; | &cross; | 2500      | SPEED   | Platform locations                         | 
-| Chainsaw         | Kill Count        | &check; | &check; | &cross; | 2500      | ATTACK  | Enemy and agent spawn locations            | 
-| Raise the Roof   | Frames Alive      | &cross; | &cross; | &cross; | 2500      | USE     | Agent spawn location                       | 
-| Run and Gun      | Kill Count        | &check; | &check; | &cross; | 2500      | ATTACK  | Enemy and agent spawn locations            | 
-| Health Gathering | Frames Alive      | &cross; | &cross; | &check; | 2500      | SPEED   | Health kit spawn locations                 | 
+| Scenario         | Success Metric    | Enemies | Weapon  | Items   | Max Steps | Execute Action | Stochasticity                              | Image                                                  | 
+|------------------|-------------------|---------|---------|---------|-----------|----------------|--------------------------------------------|--------------------------------------------------------|  
+| Pitfall          | Distance Covered  | &cross; | &cross; | &cross; | 1000      | JUMP           | Pitfall tile locations                     | ![Default](assets/images/CO_envs/pitfall.png)          |
+| Arms Dealer      | Weapons Delivered | &cross; | &check; | &check; | 1000      | SPEED          | Weapon spawn locations, delivery locations | ![Default](assets/images/CO_envs/arms_dealer.png)      |
+| Hide and Seek    | Frames Alive      | &check; | &cross; | &check; | 2500      | SPEED          | Enemy behaviour, item spawn locations      | ![Default](assets/images/CO_envs/hide_and_seek.png)    |
+| Floor is Lava    | Frames Alive      | &cross; | &cross; | &cross; | 2500      | SPEED          | Platform locations                         | ![Default](assets/images/CO_envs/floor_is_lava.png)    |
+| Chainsaw         | Kill Count        | &check; | &check; | &cross; | 2500      | ATTACK         | Enemy and agent spawn locations            | ![Default](assets/images/CO_envs/chainsaw.png)         |
+| Raise the Roof   | Frames Alive      | &cross; | &cross; | &cross; | 2500      | USE            | Agent spawn location                       | ![Default](assets/images/CO_envs/raise_the_roof.png)   |
+| Run and Gun      | Kill Count        | &check; | &check; | &cross; | 2500      | ATTACK         | Enemy and agent spawn locations            | ![Default](assets/images/CO_envs/run_and_gun.png)      |
+| Health Gathering | Frames Alive      | &cross; | &cross; | &check; | 2500      | SPEED          | Health kit spawn locations                 | ![Default](assets/images/CO_envs/health_gathering.png) |
 
 
 
@@ -94,19 +98,19 @@ The algorithms are implemented on top of the Soft-Actor-Critic (SAC) reinforceme
 Please follow the instructions in the [CL module](CL/README.md) to use the algorithms.
 The following table ranks the baselines from best to worst performing
 
-| Method                                                                                                               | Type           |                                                                                                        
-|----------------------------------------------------------------------------------------------------------------------|----------------|
-| [PackNet](https://openaccess.thecvf.com/content_cvpr_2018/papers/Mallya_PackNet_Adding_Multiple_CVPR_2018_paper.pdf) | Structure      |
-| [ClonEx-SAC](https://arxiv.org/pdf/2209.13900.pdf)                                                                   | Memory         |
-| L2                                                                                                                   | Regularization |
-| [MAS](https://arxiv.org/pdf/1711.09601.pdf)                                                                          | Regularization |
-| [EWC](https://www.pnas.org/doi/epdf/10.1073/pnas.1611835114)                                                         | Regularization |
-| Fine-Tuning                                                                                                          | Naïve          |
-| [VCL](https://arxiv.org/pdf/1710.10628.pdf)                                                                          | Regularization |                                                           
-| [AGEM](https://arxiv.org/pdf/1812.00420.pdf)                                                                         | Memory         |
-| [Perfect Memory*](https://arxiv.org/abs/2105.10919)                                                                  | Memory         |
+| Method                                                                                                               | Type           | Score |                                                                                                        
+|----------------------------------------------------------------------------------------------------------------------|----------------|-------|
+| [PackNet](https://openaccess.thecvf.com/content_cvpr_2018/papers/Mallya_PackNet_Adding_Multiple_CVPR_2018_paper.pdf) | Structure      | 0.74  |
+| [ClonEx-SAC](https://arxiv.org/pdf/2209.13900.pdf)                                                                   | Memory         | 0.73  |
+| L2                                                                                                                   | Regularization | 0.64  |
+| [MAS](https://arxiv.org/pdf/1711.09601.pdf)                                                                          | Regularization | 0.56  |
+| [EWC](https://www.pnas.org/doi/epdf/10.1073/pnas.1611835114)                                                         | Regularization | 0.54  |
+| Fine-Tuning                                                                                                          | Naïve          | 0.40  |
+| [VCL](https://arxiv.org/pdf/1710.10628.pdf)                                                                          | Regularization | 0.33  |                                                          
+| [AGEM](https://arxiv.org/pdf/1812.00420.pdf)                                                                         | Memory         | 0.28  |
+| [Perfect Memory*](https://arxiv.org/abs/2105.10919)                                                                  | Memory         | 0.89* |
 
-_*The memory consumption of the method is too high to run on longer sequences of the benchmark, so it does not follow the ranking in the table._ 
+_*The memory consumption of the method is too high to feasible run it on the longer sequences of the benchmark, so it does not follow the ranking in the table._ 
 
 ## Evaluation Metrics
 We evaluate the continual learning methods on the COOM benchmark based on Average Performance, Forgetting, and Forward Transfer.
