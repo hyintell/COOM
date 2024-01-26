@@ -9,12 +9,12 @@ from COOM.utils.config import Sequence, sequence_scenarios, sequence_tasks, scen
 from COOM.wrappers.observation import Augment, Resize, Rescale, RGBStack
 
 
-def create_doom_envs(sequence: Sequence,
-                     random_order: bool = False,
-                     scenarios_kwargs: List[Dict[str, any]] = None,
-                     doom_kwargs: Dict[str, any] = None,
-                     wrapper_config: Dict[str, any] = None,
-                     task_idx: int = None) -> List[DoomEnv]:
+def make_sequence(sequence: Sequence,
+                  random_order: bool = False,
+                  scenarios_kwargs: List[Dict[str, any]] = None,
+                  doom_kwargs: Dict[str, any] = None,
+                  wrapper_config: Dict[str, any] = None,
+                  task_idx: int = None) -> List[DoomEnv]:
     """
     Creates a list of Doom environments based on the given sequence configuration.
 
@@ -33,16 +33,16 @@ def create_doom_envs(sequence: Sequence,
     # Retrieve scenarios and tasks based on the sequence
     scenarios = sequence_scenarios[sequence]
     tasks = sequence_tasks[sequence]
-    return build_doom_envs(scenarios, tasks, random_order, task_idx, scenarios_kwargs, doom_kwargs, wrapper_config)
+    return make_envs(scenarios, tasks, random_order, task_idx, scenarios_kwargs, doom_kwargs, wrapper_config)
 
 
-def build_doom_envs(scenarios: List[Scenario],
-                    tasks: List[str],
-                    random_order: bool = False,
-                    task_idx: int = None,
-                    scenarios_kwargs: List[Dict[str, any]] = None,
-                    doom_kwargs: Dict[str, any] = None,
-                    wrapper_config: Dict[str, any] = None) -> List[DoomEnv]:
+def make_envs(scenarios: List[Scenario],
+              tasks: List[str],
+              random_order: bool = False,
+              task_idx: int = None,
+              scenarios_kwargs: List[Dict[str, any]] = None,
+              doom_kwargs: Dict[str, any] = None,
+              wrapper_config: Dict[str, any] = None) -> List[DoomEnv]:
 
     # Optionally shuffle scenarios and tasks for randomization
     if random_order:
@@ -63,17 +63,17 @@ def build_doom_envs(scenarios: List[Scenario],
         task = pair[1]
         scenario = scenario_and_kwargs[0]
         scenario_kwargs = scenario_and_kwargs[1]
-        env = create_single_env(scenario, task, task_id, scenario_kwargs, doom_kwargs, wrapper_config)
+        env = make_env(scenario, task, task_id, scenario_kwargs, doom_kwargs, wrapper_config)
         envs.append(env)
     return envs
 
 
-def create_single_env(scenario: Scenario,
-                      task: str = 'default',
-                      task_idx: int = 0,
-                      scenario_kwargs: Dict[str, any] = None,
-                      doom_kwargs: Dict[str, any] = None,
-                      wrapper_config: Dict[str, any] = None) -> DoomEnv:
+def make_env(scenario: Scenario,
+             task: str = 'default',
+             task_idx: int = 0,
+             scenario_kwargs: Dict[str, any] = None,
+             doom_kwargs: Dict[str, any] = None,
+             wrapper_config: Dict[str, any] = None) -> DoomEnv:
     """
     Creates a single Doom environment instance with specified configurations.
 

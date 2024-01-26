@@ -18,7 +18,7 @@ from CL.rl.models import MlpActor
 from CL.rl.sac import SAC
 from CL.utils.logging import EpochLogger, WandBLogger
 from CL.utils.running import get_activation_from_str
-from COOM.env.builder import build_doom_envs, build_multi_discrete_actions
+from COOM.env.builder import make_envs, build_multi_discrete_actions
 from COOM.env.continual import ContinualLearningEnv
 from COOM.utils.config import Sequence, Scenario, sequence_scenarios, sequence_tasks, default_wrapper_config, \
     scenario_config
@@ -92,8 +92,8 @@ def main(parser: argparse.ArgumentParser):
     wrapper_config['record_dir'] = record_dir
 
     # Create the test tasks
-    test_tasks = build_doom_envs(test_scenarios, test_tasks, args.random_order, task_idx,
-                                 scenario_kwargs, doom_kwargs, wrapper_config)
+    test_tasks = make_envs(test_scenarios, test_tasks, args.random_order, task_idx,
+                           scenario_kwargs, doom_kwargs, wrapper_config)
 
     # Create the continual learning environment
     cl_env = ContinualLearningEnv(sequence, args.steps_per_env, args.start_from, args.random_order,

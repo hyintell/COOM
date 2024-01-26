@@ -1,12 +1,12 @@
 import argparse
 
-from COOM.env.builder import create_single_env
+from COOM.env.builder import make_env
 from COOM.utils.config import Scenario
 
 
 def main(args: argparse.Namespace):
     scenario = Scenario[args.scenario.upper()]
-    env = create_single_env(scenario, args.task)
+    env = make_env(scenario, args.task)
     env.reset()
     total_reward = 0
     success = 0

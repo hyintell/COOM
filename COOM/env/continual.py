@@ -5,7 +5,7 @@ import numpy as np
 from numpy import ndarray
 
 from COOM.env.base import BaseEnv
-from COOM.env.builder import create_doom_envs
+from COOM.env.builder import make_sequence
 from COOM.env.scenario import DoomEnv
 from COOM.utils.config import Sequence
 
@@ -43,7 +43,7 @@ class ContinualLearningEnv(BaseEnv):
                  wrapper_config: Dict[str, any] = None,
                  ):
         self.steps_per_env = steps_per_env
-        self.envs = create_doom_envs(sequence, random_order, scenario_config, doom_config, wrapper_config)
+        self.envs = make_sequence(sequence, random_order, scenario_config, doom_config, wrapper_config)
         self._num_tasks = len(self.envs)
         self.steps = steps_per_env * self.num_tasks
         self.cur_seq_idx = start_from

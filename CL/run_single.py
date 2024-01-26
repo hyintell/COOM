@@ -8,7 +8,7 @@ from CL.replay.buffers import BufferType
 from CL.rl.sac import SAC
 from CL.utils.logging import EpochLogger, WandBLogger
 from CL.utils.running import get_activation_from_str
-from COOM.env.builder import create_single_env, build_multi_discrete_actions
+from COOM.env.builder import make_env, build_multi_discrete_actions
 from COOM.utils.config import Scenario, scenario_config, default_wrapper_config
 from config import parse_args, update_wrapper_config
 
@@ -59,8 +59,8 @@ def main(parser: argparse.ArgumentParser):
     wrapper_conf['record_dir'] = record_dir
 
     # Create the environment
-    env = create_single_env(scenario_enum, args.envs[0], task_idx, scenario_kwargs, doom_kwargs, wrapper_conf)
-    test_envs = [create_single_env(scenario_enum, task, task_idx, scenario_kwargs, doom_kwargs, wrapper_conf)
+    env = make_env(scenario_enum, args.envs[0], task_idx, scenario_kwargs, doom_kwargs, wrapper_conf)
+    test_envs = [make_env(scenario_enum, task, task_idx, scenario_kwargs, doom_kwargs, wrapper_conf)
                  for task in args.test_envs]
     if not test_envs and args.test_only:
         test_envs = [env]
