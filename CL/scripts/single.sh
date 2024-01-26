@@ -24,7 +24,7 @@ python run_single.py --seed [SEED] --envs hard --scenario health_gathering
 python run_single.py --seed [SEED] --scenario run_and_gun --envs obstacles
 python run_single.py --seed [SEED] --scenario run_and_gun --envs green
 python run_single.py --seed [SEED] --scenario run_and_gun --envs resized
-python run_single.py --seed [SEED] --scenario run_and_gun --envs invulnerable
+python run_single.py --seed [SEED] --scenario run_and_gun --envs monsters
 python run_single.py --seed [SEED] --scenario run_and_gun --envs default
 python run_single.py --seed [SEED] --scenario run_and_gun --envs red
 python run_single.py --seed [SEED] --scenario run_and_gun --envs blue

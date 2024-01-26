@@ -34,7 +34,7 @@ TRANSLATIONS = {
     'obstacles': 'Obstacles',
     'green': 'Green',
     'resized': 'Resized',
-    'invulnerable': 'Monsters',
+    'monsters': 'Monsters',
     'default': 'Default',
     'red': 'Red',
     'blue': 'Blue',
@@ -88,13 +88,13 @@ TRANSLATIONS = {
 
 SEQUENCES = {
     'CD4': ['default', 'red', 'blue', 'shadows'],
-    'CD8': ['obstacles', 'green', 'resized', 'invulnerable', 'default', 'red', 'blue', 'shadows'],
+    'CD8': ['obstacles', 'green', 'resized', 'monsters', 'default', 'red', 'blue', 'shadows'],
     'CO4': ['chainsaw', 'raise_the_roof', 'run_and_gun', 'health_gathering'],
     'CO8': ['pitfall', 'arms_dealer', 'hide_and_seek', 'floor_is_lava', 'chainsaw', 'raise_the_roof', 'run_and_gun',
             'health_gathering'],
     'COC': ['pitfall', 'arms_dealer', 'hide_and_seek', 'floor_is_lava', 'chainsaw', 'raise_the_roof', 'run_and_gun',
             'health_gathering'],
-    'CD16': 2 * ['obstacles', 'green', 'resized', 'invulnerable', 'default', 'red', 'blue', 'shadows'],
+    'CD16': 2 * ['obstacles', 'green', 'resized', 'monsters', 'default', 'red', 'blue', 'shadows'],
     'CO16': 2 * ['pitfall', 'arms_dealer', 'hide_and_seek', 'floor_is_lava', 'chainsaw', 'raise_the_roof',
                  'run_and_gun', 'health_gathering'],
 }

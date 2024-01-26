@@ -80,7 +80,7 @@ CD_scenarios = [Scenario.RUN_AND_GUN]
 CO_scenarios = [Scenario.PITFALL, Scenario.ARMS_DEALER, Scenario.HIDE_AND_SEEK, Scenario.FLOOR_IS_LAVA,
                 Scenario.CHAINSAW, Scenario.RAISE_THE_ROOF, Scenario.RUN_AND_GUN,
                 Scenario.HEALTH_GATHERING]
-CD_tasks = ['obstacles', 'green', 'resized', 'invulnerable', 'default', 'red', 'blue', 'shadows']
+CD_tasks = ['obstacles', 'green', 'resized', 'monsters', 'default', 'red', 'blue', 'shadows']
 CO_tasks = ['default']
 COC_tasks = ['hard']
 
