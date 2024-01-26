@@ -26,7 +26,7 @@ $ pip install .
 ```
 
 ## Environments
-The benchmark consists of 8 scenarios:
+COOM contains 8 scenarios:
 
 | Scenario         | Success Metric    | Enemies | Weapon  | Items   | Max Steps | Execute Action | Stochasticity                              | Image                                                  | 
 |------------------|-------------------|---------|---------|---------|-----------|----------------|--------------------------------------------|--------------------------------------------------------|  
@@ -39,18 +39,45 @@ The benchmark consists of 8 scenarios:
 | Run and Gun      | Kill Count        | &check; | &check; | &cross; | 2500      | ATTACK         | Enemy and agent spawn locations            | ![Default](assets/images/CO_envs/run_and_gun.png)      |
 | Health Gathering | Frames Alive      | &cross; | &cross; | &check; | 2500      | SPEED          | Health kit spawn locations                 | ![Default](assets/images/CO_envs/health_gathering.png) |
 
-
+Every scenario except `Run and Gun` has 2 environments: `default` and `hard`. The full list of environment is the following:
+- `pitfall-default-v0` - traverse a tunnel as far as possible without falling into a pit
+- `pitfall-hard-v0` - the agent has reduced movement speed and there are more pits in the surface
+- `arms_dealer-default-v0` - collect and deliver weapons to the marked locations as fast as possible
+- `arms_dealer-hard-v0` - the map is larger and there are fewer weapons to collect
+- `hide_and_seek-default-v0` - escape and hide from enemies as long as possible
+- `hide_and_seek-hard-v0` - there are more enemies and they are faster
+- `floor_is_lava-default-v0` - keep off the laval by navigating to new platforms as they reappear at new locations
+- `floor_is_lava-hard-v0` - there are fewer platforms to stand on and their locations are in more rapid change
+- `chainsaw-default-v0` - seek out and melee as many enemies as possible
+- `chainsaw-hard-v0` - there are fewer enemies to find, and they are tougher to eliminate
+- `raise_the_roof-default-v0` - locate and press switches on the walls to raise the ceiling and avoid getting crushed
+- `raise_the_roof-hard-v0` - the ceiling is lowered faster and the switches are harder to spot
+- `run_and_gun-default-v0` - use a pistol to eliminate as many enemies as possible
+- `run_and_gun-hard-v0` - there are fewer enemies to find, and they are tougher to eliminate
+- `run_and_gun-obstacles-v0` - there are obstacles in the environment which block the agent's movement
+- `run_and_gun-green-v0` - the wall, ceiling and floor textures are green
+- `run_and_gun-resized-v0` - the agent's view height is randomized and the targets are randomly resized
+- `run_and_gun-monsters-v0` - the targets are replaced with monsters that move around and fight back
+- `run_and_gun-red-v0` - the wall, ceiling and floor textures are red
+- `run_and_gun-blue-v0` - the wall, ceiling and floor textures are blue
+- `run_and_gun-shadows-v0` - the targets are less visible due to lowered opacity
+- `health_gathering-default-v0` - collect health kits as fast as possible to stay alive
+- `health_gathering-hard-v0` - there are fewer health kits to find and the environment layout is more complex
 
 ## Task Sequences for Continual Learning
+To formulate a continual learning problem, we compose sequences of tasks, where each task is an environment of a 
+scenario. The agent is trained on each task sequentially, without access to the previous tasks. The agent is continually
+evaluated on all tasks throughout training. The task sequence is considered solved if the agent achieves maximum success 
+on all tasks.
 There are three lengths of Continual Learning task sequences in our benchmark: 
-1) 8-task sequences act as the core of the benchmark
-2) 4-task sequences are comprised of the 2<sup>nd</sup> half of the main sequence
-3) 16-task sequences concatenate two core sequences
+1) 8-task sequences serve as the core of the benchmark
+2) 4-task sequences are comprised of the 2<sup>nd</sup> half of an 8-task sequence
+3) 16-task sequences combine tasks of two 8-task sequences
 
-We further distinguish between two sequence types: `Cross-Domain` and `Cross-Objective`. 
+We further distinguish between the `Cross-Domain` and `Cross-Objective` sequences. 
 
 ### Cross-Domain
-In the cross-domain setting, the agent is sequentially trained on modified versions of the same ViZDoom scenario. 
+In the cross-domain setting, the agent is sequentially trained on modified versions of the same scenario. 
 `Run and Gun` is selected as basis for this CL sequence, since out of the 8 scenarios in the benchmark, it best resembles 
 the actual Doom game, requiring the agent to navigate the map and eliminate enemies by firing a weapon. The objective and
 the layout of the map remain the same across tasks, whereas we modify the environment in the following ways: 
@@ -75,6 +102,26 @@ Gathering` endorse constant movement.
 Below we provide a short code snippet to run a sequence with the COOM benchmark.
 
 ## Basic Usage
+Find examples of using COOM environments in the 
+[run_single](examples/run_single.py) and [run_sequence](examples/run_sequence.py) scripts.
+
+### Single Environment
+```
+from COOM.env.builder import make_env
+from COOM.utils.config import Scenario
+
+env = make_env(Scenario.RAISE_THE_ROOF)
+env.reset()
+for steps in range(1000):
+    action = env.action_space.sample()
+    state, reward, done, truncated, info = env.step(action)
+    env.render()
+    if done:
+        break
+env.close()
+```
+
+### Task Sequence
 ```
 from COOM.env.continual import ContinualLearningEnv
 from COOM.utils.config import Sequence
@@ -95,7 +142,7 @@ for env in cl_env.tasks:
 # Baseline Results
 We have employed various popular continual learning algorithms to evaluate their performance on the COOM benchmark.
 The algorithms are implemented on top of the Soft-Actor-Critic (SAC) reinforcement learning algorithm.
-Please follow the instructions in the [CL module](CL/README.md) to use the algorithms.
+Please follow the instructions in the [Continual Learning module](CL/README.md) to use the algorithms.
 The following table ranks the baselines from best to worst performing
 
 | Method                                                                                                               | Type           | Score |                                                                                                        
