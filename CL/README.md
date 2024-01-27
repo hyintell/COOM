@@ -4,7 +4,7 @@ This module provides popular continual learning baseline implementations on top 
 The implementation is based on Tensorflow.
 
 ## Installation
-To install the continual learning module, run the following command from the root directory of the repository:
+To install the continual learning module, run the following command:
 ```bash 
 $ pip install COOM[cl]
 ```

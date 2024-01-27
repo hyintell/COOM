@@ -2,7 +2,13 @@
 This module provides scripts for downloading and plotting the results of the experiments in our paper.
 The results are stored in [Weights | Biases](https://wandb.ai/) and can be downloaded using the scripts in the [download](download) folder.
 The plotting scripts are located in the [plotting](plotting) folder.
-Calculating the metrics used in the paper can be done using the [cl_metrics.py](tables/cl_metrics.py) script.
+Calculating the core results in the paper can be done using the [cl_metrics.py](tables/cl_metrics.py) script.
+
+## Installation
+To install the results module, run the following command:
+```bash 
+$ pip install COOM[results]
+```
 
 ### Running experiments
 For running the experiments in our paper please follow the instructions in the continual learning (CL) module [README.md](../CL/README.md).

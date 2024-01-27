@@ -12,6 +12,12 @@ and a demo is available on [Youtube](https://www.youtube.com/watch?v=FUm2B8MZ6d0
 </p>
 
 ## Installation
+To install COOM from PyPi, just run:
+```bash
+$ pip install COOM
+```
+
+Alternatively, to install COOM from source, clone this repo, cd to it, and then:
 1. Clone the repository
 ```bash
 $ git clone https://github.com/hyintell/COOM
