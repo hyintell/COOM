@@ -1,7 +1,7 @@
 from typing import Callable
 
 import numpy as np
-from gym import RewardWrapper
+from gymnasium import RewardWrapper
 from vizdoom import GameVariable
 
 
