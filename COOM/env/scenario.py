@@ -27,7 +27,6 @@ class DoomEnv(BaseEnv):
         frame_skip (int): Number of frames to skip for each action.
         record_every (int): Frequency of recording episodes.
         metadata (Dict): Metadata for the environment, including supported render modes.
-        viewer (Any): Viewer instance for rendering (if applicable).
         game (vzd.DoomGame): Instance of the ViZDoom game engine.
         game_res (Tuple[int, int, int]): Resolution of the game screen.
         _action_space (gymnasium.spaces.Discrete): The action space of the environment.
@@ -73,7 +72,6 @@ class DoomEnv(BaseEnv):
         # Recording
         self.metadata['render.modes'] = 'rgb_array'
         self.record_every = record_every
-        self.viewer = None
 
         # Determine the directory of the doom scenario
         scenario_dir = f'{Path(__file__).parent.resolve()}/scenarios/{self.scenario}'
@@ -140,7 +138,7 @@ class DoomEnv(BaseEnv):
         return self._action_space
 
     @property
-    def observation_space(self) -> gymnasium.Space:
+    def observation_space(self) -> gymnasium.spaces.Box:
         return self._observation_space
 
     def reset(self, *, seed: Optional[int] = None, options: Optional[dict] = None, ) -> Tuple[
@@ -194,8 +192,6 @@ class DoomEnv(BaseEnv):
         observation = np.transpose(state.screen_buffer, [1, 2, 0]) if state else np.float32(np.zeros(self.game_res))
         if not done:
             self.game_variable_buffer.append(state.game_variables)
-        if self.render_enabled:
-            self.render('human')
 
         self.store_statistics(self.game_variable_buffer)
         return observation, reward, done, truncated, info
@@ -287,7 +283,7 @@ class DoomEnv(BaseEnv):
         self.user_variables[game_var] = self.game.get_game_variable(game_var)
         return prev_var
 
-    def render(self, mode="rgb_array"):
+    def render(self, mode="human"):
         """
         Renders the current state of the environment based on the specified mode.
 
