@@ -2,10 +2,8 @@ from setuptools import find_packages, setup
 
 # Required dependencies
 coom_requirements = [
-    "gymnasium",
-    "numpy",
-    "opencv-python",
     "vizdoom",
+    "opencv-python",
     "scipy==1.11.4",
 ]
 
