@@ -32,7 +32,7 @@ $ pip install .
 ```
 
 ## Environments
-COOM contains of 8 scenarios:
+COOM contains 8 scenarios:
 
 | Scenario         | Success Metric    | Enemies | Weapon  | Items   | Max Steps | Execute Action | Stochasticity                              | Image                                                  | 
 |------------------|-------------------|---------|---------|---------|-----------|----------------|--------------------------------------------|--------------------------------------------------------|  
