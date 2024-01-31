@@ -112,7 +112,7 @@ Find examples of using COOM environments in the
 [run_single](examples/run_single.py) and [run_sequence](examples/run_sequence.py) scripts.
 
 ### Single Environment
-```
+```python
 from COOM.env.builder import make_env
 from COOM.utils.config import Scenario
 
@@ -128,7 +128,7 @@ env.close()
 ```
 
 ### Task Sequence
-```
+```python
 from COOM.env.continual import ContinualLearningEnv
 from COOM.utils.config import Sequence
 
@@ -203,7 +203,7 @@ Our experiments were managed using [WandB](https://wandb.ai).
 
 # Citation
 If you use our work in your research, please cite it as follows:
-```
+```bibtex
 @inproceedings{tomilin2023coom,
     title={COOM: A Game Benchmark for Continual Reinforcement Learning},
     author={Tomilin, Tristan and Fang, Meng and Zhang, Yudi and Pechenizkiy, Mykola},
