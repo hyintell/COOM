@@ -33,7 +33,7 @@ def main(args: argparse.Namespace) -> None:
                                colors=[cmap(i) for i in range(n_actions)])
             sub_plot.tick_params(labelbottom=True)
             sub_plot.set_title(sequence)
-            sub_plot.set_ylabel("Number of Actions", fontsize=14)
+            sub_plot.set_ylabel("Actions", fontsize=14)
             sub_plot.set_xlim(0, iterations)
             sub_plot.set_ylim(0, ep_time_steps)
 
@@ -53,8 +53,11 @@ def main(args: argparse.Namespace) -> None:
         plt.tight_layout(rect=[0, bottom_adjust, 1, 1])
 
         file_path = 'plots/actions'
+        pdf_file_path = 'plots/actions/pdf'
         os.makedirs(file_path, exist_ok=True)
-        plt.savefig(f'{file_path}/{method}_{"_".join(sequences)}.pdf')
+        os.makedirs(pdf_file_path, exist_ok=True)
+        plt.savefig(f'{file_path}/{method}_{"_".join(sequences)}_{title}.png')
+        plt.savefig(f'{pdf_file_path}/{method}_{"_".join(sequences)}_{title}.pdf')
         plt.show()
 
 
