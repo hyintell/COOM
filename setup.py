@@ -5,6 +5,7 @@ coom_requirements = [
     "vizdoom",
     "opencv-python",
     "scipy==1.11.4",
+    "gymnasium==0.28.1"
 ]
 
 cl_requirements = [
