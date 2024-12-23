@@ -2,7 +2,8 @@
 
 COOM is a Continual Learning benchmark for embodied pixel-based RL, consisting of task sequences in visually 
 distinct 3D environments with diverse objectives and egocentric perception. COOM is designed for task-incremental learning,
-in which task boundaries are clearly defined. A short demo of COOM is available on [Youtube](https://www.youtube.com/watch?v=FUm2B8MZ6d0&list=PL6nJZHA3y2fxQK73jmuI5teM3n6Mydcf7).
+in which task boundaries are clearly defined. A short presentation of COOM is available on [NeurIPS](https://neurips.cc/virtual/2023/poster/73450) 
+and a demo on [Youtube](https://www.youtube.com/watch?v=FUm2B8MZ6d0&list=PL6nJZHA3y2fxQK73jmuI5teM3n6Mydcf7).
 
 <p align="center">
   <img src="assets/gifs/demo1.gif" alt="Demo1" style="vertical-align: top;"/>
